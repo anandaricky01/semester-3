@@ -1,9 +1,3 @@
-<?php 
-
-	session_start();
-
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +5,11 @@
 </head>
 <body>
 
-	<?php if(isset($_SESSION['peringatan'])) 
+	<?php if(isset($_GET['pesan'])) 
 	{
-		echo "<p style='color: red;'>" . $_SESSION['peringatan'] . "</p>";
+		if ($_GET['pesan'] == 'salah') {
+			echo "<p style='color: red;'>" . "Maaf Username atau Password anda salah!" . "</p>";
+		}
 	}
 	?>
 	

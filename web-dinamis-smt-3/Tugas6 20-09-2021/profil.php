@@ -13,8 +13,8 @@
 
 	<h1>Selamat Datang</h1>
 	<h4>Anda Berhasil Login</h4>
-	Nama Anda : <?php echo $_SESSION['nama']; ?><br>
-	Email Anda : <?php echo $_SESSION['email']; ?>
+	Nama Anda : <?php if(isset($_SESSION['nama'])){ echo $_SESSION['nama']; } ?><br>
+	Email Anda : <?php if(isset($_SESSION['email'])){ echo $_SESSION['email']; } ?>
 
 </body>
 </html>

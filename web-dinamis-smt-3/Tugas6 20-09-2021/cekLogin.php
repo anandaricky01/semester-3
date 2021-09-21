@@ -4,19 +4,19 @@
 
 	if (isset($_POST['username']) && isset($_POST['password'])) {
 		
-		$_SESSION['username'] = $_POST['username'];
-		$_SESSION['password'] = $_POST['password'];
-		$_SESSION['nama'] = $_POST['nama'];
-		$_SESSION['email'] = $_POST['email'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
 
-		if ($_SESSION['username'] === 'anandaricky' && $_SESSION['password'] === 'password') {
+		if ($username === 'anandaricky' && $password === 'password') {
 			
+			$_SESSION['nama'] = $_POST['nama'];
+			$_SESSION['email'] = $_POST['email'];
 			header("Location:profil.php");
 
 		} else {
 
-			$_SESSION['peringatan'] = 'Maaf Username atau Nama salah!';
-			header("Location:form.php");
+			header("Location:form.php?pesan=salah");
+
 		}
 
 	} 
