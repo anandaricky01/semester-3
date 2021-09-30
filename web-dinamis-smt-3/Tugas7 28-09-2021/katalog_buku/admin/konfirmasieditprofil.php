@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include('koneksi/koneksi.php');
+include('../koneksi/koneksi.php');
 if(isset($_SESSION['id_user'])){
 	$id_user = $_SESSION['id_user'];
 	$nama = $_POST['nama'];

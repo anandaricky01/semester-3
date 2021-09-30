@@ -1,6 +1,6 @@
 <?php
     //akses file koneksi database
-    include('koneksi/koneksi.php');
+    include('../koneksi/koneksi.php');
     if (isset($_POST['login'])) {
         $user = $_POST['username'];
         $pass = $_POST['password'];

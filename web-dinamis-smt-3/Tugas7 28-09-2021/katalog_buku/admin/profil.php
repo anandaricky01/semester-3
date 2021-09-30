@@ -1,7 +1,7 @@
 <?php 
 
   session_start();
-  include('koneksi/koneksi.php');
+  include('../koneksi/koneksi.php');
   $id_user = $_SESSION['id_user'];
   //get profil
   $sql = "select `nama`, `email`,`foto` from `user`
@@ -21,13 +21,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<?php include("admin/includes/head.php") ?> 
+<?php include("includes/head.php") ?> 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-<?php include("admin/includes/header.php") ?>
+<?php include("includes/header.php") ?>
 
-  <?php include("admin/includes/sidebar.php") ?>
+  <?php include("includes/sidebar.php") ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -73,7 +73,7 @@
                       </tr> 
                       <tr>
                          <td width="20%"><strong>Foto<strong></td>
-                         <td width="80%"><img src="admin/foto/<?php echo $foto;?>" class="img-fluid" width="200px;"></td>
+                         <td width="80%"><img src="foto/<?php echo $foto;?>" class="img-fluid" width="200px;"></td>
                       </tr>                
                       <tr>
                           <td width="20%"><strong>Nama<strong></td>
@@ -96,11 +96,11 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <?php include("admin/includes/footer.php") ?>
+  <?php include("includes/footer.php") ?>
 
 </div>
 <!-- ./wrapper -->
 
-<?php include("admin/includes/script.php") ?>
+<?php include("includes/script.php") ?>
 </body>
 </html>
