@@ -37,7 +37,6 @@
 
 	// proses data
 	$query = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE username = '$username'");
-	
 	$data = mysqli_fetch_assoc($query);
 	
 	$result = mysqli_num_rows($query);
