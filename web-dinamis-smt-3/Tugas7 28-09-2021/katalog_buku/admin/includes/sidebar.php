@@ -80,14 +80,18 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="user.php" class="nav-link">
-              <i class="nav-icon fas fa-user-cog"></i>
-              <p>
-                Pengaturan User
-              </p>
-            </a>
-          </li>
+          <?php 
+            if (isset($_SESSION['level'])){
+              if ($_SESSION['level']=="Superadmin"){?>
+              <li class="nav-item">
+                  <a href="user.php" class="nav-link">
+                  <i class="nav-icon fas fa-user-cog"></i>
+                  <p>
+                     Pengaturan User
+                  </p>
+                  </a>
+              </li>
+          <?php }}?>
           <li class="nav-item">
             <a href="ubahpassword.php" class="nav-link">
               <i class="nav-icon fas fa-user-lock"></i>

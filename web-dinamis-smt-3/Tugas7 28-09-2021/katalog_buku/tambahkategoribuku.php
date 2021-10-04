@@ -49,12 +49,12 @@
             <?php }?>
           <?php }?>
       </div>
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="POST" action="konfirmasitambahkategoribuku.php">
         <div class="card-body">
           <div class="form-group row">
             <label for="kategoribuku" class="col-sm-3 col-form-label">Kategori Buku</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="kategoribuku" value="">
+              <input type="text" class="form-control" id="kategoribuku" value="" name="kategori_buku">
             </div>
           </div>
         </div>
