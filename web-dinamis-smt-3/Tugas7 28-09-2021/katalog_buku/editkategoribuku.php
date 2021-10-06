@@ -6,7 +6,7 @@
     $_SESSION['id_kategori_buku']=$id_kategori_buku;
     
       //get data kategori buku
-    $sql_d = "select `kategori_buku` from `kategori_buku` where `id_kategori_buku` = '$id_kategori_buku'";
+    $sql_d = "SELECT `kategori_buku` from `kategori_buku` where `id_kategori_buku` = '$id_kategori_buku'";
     $query_d = mysqli_query($koneksi,$sql_d);
     while($data_d = mysqli_fetch_row($query_d)){
        $kategori_buku= $data_d[0];

@@ -66,6 +66,7 @@
             <?php }?>
           <?php }?>
       </div>
+      
       <form class="form-horizontal" method="post" action="konfirmasieditprofil.php" enctype="multipart/form-data">
         <div class="card-body">          
           <div class="form-group row">

@@ -109,8 +109,7 @@
                             '%$katakunci_kategori%'";
                       } 
                       $sql_k .= " ORDER BY `kategori_buku` limit $posisi, $batas ";
-                      $query_k = mysqli_query($koneksi,$sql_k);
-                      $no = 1;
+                      $query_k = mysqli_query($koneksi,$sql_k);                      $no = 1;
                       while($data_k = mysqli_fetch_row($query_k)){
                          $id_kategori_buku = $data_k[0];
                          $kategori_buku = $data_k[1];
@@ -120,10 +119,7 @@
                       <td><?php echo $kategori_buku;?></td>
                       <td align="center">
                       <a href="editkategoribuku.php?data=<?php echo $id_kategori_buku;?>"class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
-                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data 
-                        <?php echo $kategori_buku; ?>?'))window.location.href =  
-                       'kategoribuku.php?aksi=hapus&data=<?php echo 
-                        $id_kategori_buku;?>&notif=hapusberhasil'" 
+                      <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?php echo $kategori_buku; ?>?'))window.location.href = 'kategoribuku.php?aksi=hapus&data=<?php echo $id_kategori_buku;?>&notif=hapusberhasil'" 
                         class="btn btn-xs btn-warning"><i class="fas fa-trash"></i>  
                         Hapus
                       </a>

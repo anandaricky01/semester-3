@@ -1,3 +1,16 @@
+<?php 
+  include('koneksi/koneksi.php');
+  if((isset($_GET['aksi']))&&(isset($_GET['data']))){
+    if($_GET['aksi']=='hapus'){
+      $id_penerbit = $_GET['data'];
+      //hapus kategori buku
+      $sql_dh = "delete from `penerbit` 
+      where `id_penerbit` = '$id_penerbit'";
+      mysqli_query($koneksi,$sql_dh);
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +56,7 @@
                   <form method="" action="">
                     <div class="row">
                         <div class="col-md-4 bottom-10">
-                          <input type="text" class="form-control" id="kata_kunci" name="katakunci">
+                          <input type="text" class="form-control" id="kata_kunci" name="katakunci" value="<?php if(isset($_GET["katakunci"])){ echo $_GET["katakunci"]; } ?>">
                         </div>
                         <div class="col-md-5 bottom-10">
                           <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>&nbsp; Search</button>
@@ -52,8 +65,18 @@
                   </form>
                 </div><br>
               <div class="col-sm-12">
-                  <div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>
-                  <div class="alert alert-success" role="alert">Data Berhasil Diubah</div>
+                  <?php if(!empty($_GET['notif'])){?>
+                       <?php if($_GET['notif']=="tambahberhasil"){?>
+                             <div class="alert alert-success" role="alert">
+                             Data Berhasil Ditambahkan</div>
+                       <?php } else if($_GET['notif']=="editberhasil"){?>
+                             <div class="alert alert-success" role="alert">
+                             Data Berhasil Diubah</div>
+                       <?php } else if($_GET['notif']=="hapusberhasil"){?>
+                             <div class="alert alert-success" role="alert">
+                             Data Berhasil Dihapus</div>
+                       <?php }?>
+                    <?php }?>
               </div>
                 <table class="table table-bordered">
                   <thead>                  
@@ -65,35 +88,131 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <?php 
+                      $batas = 2;
+                      if(!isset($_GET['halaman'])){
+                           $posisi = 0;
+                           $halaman = 1;
+                      }else{
+                           $halaman = $_GET['halaman'];
+                           $posisi = ($halaman-1) * $batas;
+                      }
+
+                      $sql_k = "SELECT * FROM `penerbit`";
+                      if (isset($_GET["katakunci"])){
+                            $katakunci_kategori = $_GET["katakunci"];
+                            $sql_k .= " where `penerbit` LIKE 
+                            '%$katakunci_kategori%'";
+                      } 
+                      $sql_k .= " ORDER BY `penerbit` limit $posisi, $batas ";
+                      $query_k = mysqli_query($koneksi,$sql_k); 
+                      $no = 1;
+                      while($data_k = mysqli_fetch_row($query_k)){
+                         $id_penerbit = $data_k[0];
+                         $penerbit = $data_k[1];
+                         $alamat = $data_k[2];
+                    ?>
                     <tr>
-                      <td>1.</td>
-                      <td>Andi</td>
-                      <td>Yogyakarta</td>
+                      <td><?php echo $no; ?></td>
+                      <td><?php echo $penerbit; ?></td>
+                      <td><?php echo $alamat; ?></td>
                       <td align="center">
-                        <a href="editpenerbit.php" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
-                        <a href="#" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i> Hapus</a>
+                        <a href="editpenerbit.php?data=<?php echo $id_penerbit;?>" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
+                        <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?php echo $penerbit; ?>?'))window.location.href = 'penerbit.php?aksi=hapus&data=<?php echo $id_penerbit;?>&notif=hapusberhasil'" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i> Hapus</a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Informatika</td>
-                      <td>Bandung</td>
-                      <td align="center">
-                        <a href="editpenerbit.php" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
-                        <a href="#" class="btn btn-xs btn-warning"><i class="fas fa-trash"></i> Hapus</a>
-                      </td>
-                    </tr>
+                    <?php $no++;}?>
                   </tbody>
                 </table>
+
+                <?php 
+              //hitung jumlah semua data 
+                  $sql_jum = "SELECT * FROM `penerbit`"; 
+                  if (isset($_GET["katakunci"])){
+                    $katakunci_kategori = $_GET["katakunci"];
+                    $sql_jum .= " where `penerbit` LIKE '%$katakunci_kategori%'";
+                  } 
+                  $sql_jum .= " order by `penerbit`";
+ 
+                  $query_jum = mysqli_query($koneksi,$sql_jum);
+                  $jum_data = mysqli_num_rows($query_jum);
+                  $jum_halaman = ceil($jum_data/$batas);
+                ?>
+
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                  <?php 
+                      if($jum_halaman==0){
+                         //tidak ada halaman
+                      }else if($jum_halaman==1){
+                         echo "<li class='page-item'><a class='page-link'>1</a></li>";
+                      }else{
+                         $sebelum = $halaman-1;
+                         $setelah = $halaman+1;
+                         if (isset($_GET["katakunci"])){
+                             $katakunci_kategori = $_GET["katakunci"];
+                             if($halaman!=1){
+                                echo "<li class='page-item'>
+                                <a class='page-link' 
+                                href='penerbit.php?katakunci=$katakunci_kategori&halaman=1'>First</a></li>";
+                                echo "<li class='page-item'><a class='page-link' 
+                                href='penerbit.php?katakunci=$katakunci_kategori&halaman=$sebelum'>
+                                «</a></li>";
+                             }
+
+                             for($i=1; $i<=$jum_halaman; $i++){
+                                 if ($i > $halaman - 5 and $i < $halaman + 5 ) {
+                                    if($i!=$halaman){
+                                       echo "<li class='page-item'><a class='page-link' 
+                                       href='penerbit.php?katakunci=$katakunci_kategori&halaman=$i'>$i</a></li>";
+                                    }else{
+                                       echo "<li class='page-item'><a class='page-link'>$i</a></li>";
+                                    }
+                                  }
+                              }
+
+                              if($halaman!=$jum_halaman){
+                                 echo "<li class='page-item'>
+                                 <a class='page-link'  
+                                 href='penerbit.php?katakunci=$katakunci_kategori&halaman=$setelah'>»</a></li>";
+                                 echo "<li class='page-item'><a class='page-link' 
+                                 href='penerbit.php?katakunci=$katakunci_kategori&halaman=$jum_halaman'>
+                                 Last</a></li>";
+                              }
+                          }else{
+
+                            if($halaman!=1){
+                               echo "<li class='page-item'><a class='page-link' 
+                               href='penerbit.php?halaman=1'>First</a></li>";
+                               echo "<li class='page-item'><a class='page-link' 
+                               href='penerbit.php?
+                               halaman=$sebelum'>«</a></li>";
+                             }
+
+                             for($i=1; $i<=$jum_halaman; $i++){
+                                 if ($i > $halaman - 5 and $i < $halaman + 5 ) {
+                                    if($i!=$halaman){
+                                        echo "<li class='page-item'><a class='page-link' 
+                                        href='penerbit.php?halaman=$i'>$i</a></li>";
+                                    }else{
+                                        echo "<li class='page-item'><a class='page-link'>$i</a></li>";
+                                    }
+                                 }
+                              }
+
+
+                              if($halaman!=$jum_halaman){
+                                 echo "<li class='page-item'><a class='page-link' 
+                                 href='penerbit.php?halaman=$setelah'>
+                                 »</a></li>";
+                                 echo "<li class='page-item'><a class='page-link' 
+                                 href='penerbit.php?
+                                 halaman=$jum_halaman'>Last</a></li>";
+                               }
+                              }
+                        }?>
                 </ul>
               </div>
             </div>

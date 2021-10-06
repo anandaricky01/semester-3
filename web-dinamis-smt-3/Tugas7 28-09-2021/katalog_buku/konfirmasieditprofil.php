@@ -21,11 +21,11 @@ if(isset($_SESSION['id_user'])){
 	}else{
         $lokasi_file = $_FILES['foto']['tmp_name'];
 		$nama_file = $_FILES['foto']['name'];
-		$direktori = 'foto/'.$nama_file;
+		$direktori = 'admin/foto/'.$nama_file;
 		if(move_uploaded_file($lokasi_file,$direktori)){
-            	   if(!empty($foto)){
-                     unlink("foto/$foto");
-                  }
+    	   if(!empty($foto)){
+             unlink("foto/$foto");
+          	}
 		   $sql = "update `user` set `nama`='$nama', 
                   `email`='$email', `foto`='$nama_file' 
                   where `id_user`='$id_user'";
