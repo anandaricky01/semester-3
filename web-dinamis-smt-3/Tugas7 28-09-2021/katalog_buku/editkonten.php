@@ -1,3 +1,22 @@
+<?php 
+  session_start();
+  include('koneksi/koneksi.php');
+  if(isset($_GET['data'])){
+    $id_konten = $_GET['data'];
+    $_SESSION['id_konten']=$id_konten;
+    
+      //get data kategori buku
+    $sql_d = "SELECT * FROM `konten` WHERE id_konten = $id_konten";
+    $query_d = mysqli_query($koneksi,$sql_d);
+    while($data_d = mysqli_fetch_assoc($query_d)){
+       $isi= $data_d['isi'];
+       $judul= $data_d['judul'];
+    }
+  }
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,21 +62,27 @@
       <!-- form start -->
       </br></br>
       <div class="col-sm-10">
-          <div class="alert alert-danger" role="alert">Maaf judul wajib di isi</div>
+          <?php if(!empty($_GET['notif'])){?>
+             <?php if($_GET['notif']=="editkosong"){?>
+                <div class="alert alert-danger" role="alert">
+                Maaf data Konten wajib di isi</div>
+             <?php }?>
+          <?php }?>
+
       </div>
-      <form class="form-horizontal">
+      <form class="form-horizontal" method="POST" action="konfirmasieditkonten.php">
         <div class="card-body">
           
           <div class="form-group row">
-            <label for="nim" class="col-sm-3 col-form-label">Judul</label>
+            <label for="judul" class="col-sm-3 col-form-label">Judul</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="nim" id="nim" value="About Us">
+              <input type="text" class="form-control" name="judul" id="judul" value="<?php echo $judul; ?>">
             </div>
           </div>
           <div class="form-group row">
-            <label for="sinopsis" class="col-sm-3 col-form-label">Isi</label>
+            <label for="isi" class="col-sm-3 col-form-label">Isi</label>
             <div class="col-sm-7">
-              <textarea class="form-control" name="sinopsis" id="editor1" rows="12">Lorem Ipsum</textarea>
+              <textarea class="form-control" name="isi" id="editor1" rows="12"><?php echo $isi; ?></textarea>
             </div>
           </div>     
 

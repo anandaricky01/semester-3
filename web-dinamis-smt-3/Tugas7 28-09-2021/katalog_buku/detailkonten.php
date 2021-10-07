@@ -1,3 +1,21 @@
+<?php 
+  session_start();
+  include('koneksi/koneksi.php');
+  if(isset($_GET['data'])){
+    $id_konten = $_GET['data'];
+    $_SESSION['id_konten']=$id_konten;
+    
+      //get data kategori buku
+    $sql_d = "SELECT * FROM `konten` WHERE `id_konten`=$id_konten";
+    $query_d = mysqli_query($koneksi,$sql_d);
+    while($data_d = mysqli_fetch_assoc($query_d)){
+       $judul = $data_d['judul'];
+       $isi = $data_d['isi'];
+       $tanggal = $data_d['tanggal'];
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +38,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="profil.php">Home</a></li>
               <li class="breadcrumb-item"><a href="konten.php">Data Konten</a></li>
               <li class="breadcrumb-item active">Detail Data Konten</li>
             </ol>
@@ -44,22 +62,15 @@
                     <tbody>                
                       <tr>
                         <td width="20%"><strong>Tanggal<strong></td>
-                        <td width="80%">24-02-2021</td>
+                        <td width="80%"><?php echo $tanggal; ?></td>
                       </tr>
                       <tr>
                         <td width="20%"><strong>Judul<strong></td>
-                        <td width="80%">About Us</td>
+                        <td width="80%"><?php echo $judul; ?></td>
                       </tr> 
                       <tr>
                         <td width="20%"><strong>Sinopsis<strong></td>
-                        <td width="80%">Lorem Ipsum is simply dummy text of the printing and typesetting 
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 
-                        1500s, when an unknown printer took a galley of type and scrambled it to make 
-                        a type specimen book. It has survived not only five centuries, but also the 
-                        leap into electronic typesetting, remaining essentially unchanged. It was popularised 
-                        in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                        and more recently with desktop publishing software like Aldus PageMaker including
-                         versions of Lorem Ipsum.</td>
+                        <td width="80%"><?php echo $isi; ?></td>
                       </tr> 
                     </tbody>
                   </table>  

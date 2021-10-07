@@ -15,9 +15,6 @@ if((isset($_GET['aksi']))&&(isset($_GET['data']))){
         }
       }
  
-    //hapus buku buku
-    $sql_dh = "delete from `buku_buku` where `id_buku` = '$id_buku'";
-    mysqli_query($koneksi,$sql_dh);
     //hapus data buku
     $sql_dm = "delete from `buku` where `id_buku` = '$id_buku'";
     mysqli_query($koneksi,$sql_dm);

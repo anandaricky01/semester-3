@@ -24,7 +24,7 @@ if(isset($_SESSION['id_user'])){
 		$direktori = 'admin/foto/'.$nama_file;
 		if(move_uploaded_file($lokasi_file,$direktori)){
     	   if(!empty($foto)){
-             unlink("foto/$foto");
+             unlink("admin/foto/$foto");
           	}
 		   $sql = "update `user` set `nama`='$nama', 
                   `email`='$email', `foto`='$nama_file' 
