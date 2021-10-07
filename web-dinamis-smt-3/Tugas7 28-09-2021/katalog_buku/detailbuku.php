@@ -1,3 +1,31 @@
+<?php 
+session_start();
+include('koneksi/koneksi.php');
+if(isset($_GET['data'])){
+  $id_buku = $_GET['data'];
+  //gat data buku
+  $sql = "SELECT `b`.`cover`,`k`.`kategori_buku`,`b`.`judul`,
+        `b`.`pengarang`,`b`.`tahun_terbit`,
+        `p`.`penerbit`, `b`.`sinopsis` FROM `buku` `b`
+        INNER JOIN `kategori_buku` `k` ON 
+        `b`.`id_kategori_buku`=`k`.`id_kategori_buku`
+        INNER JOIN `penerbit` `p` ON `b`.`id_penerbit`= `p`.`id_penerbit`
+        WHERE `b`.`id_buku`='$id_buku'";
+  $query = mysqli_query($koneksi,$sql);
+  while($data = mysqli_fetch_row($query)){
+    $cover = $data[0];
+    $kategori_buku = $data[1];
+    $judul = $data[2];
+    $pengarang = $data[3];
+    $tahun_terbit = $data[4];
+    $penerbit = $data[5];
+    $sinopsis = $data[6];
+  }
+ 
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,64 +90,57 @@
           <div class="col-md-9 katalog-detail">
             <div class="table-responsive">
               <table class="table table-bordered">
-                <tr>
-                  <td width="40%" rowspan="6"><img src="imgbook/books.jpg" class="img-fluid" alt="Books Collection" title="Books"></td>
-                  <td colspan="2"><h4>Suspendisse blandit dapibus lacus, a gravida ex euismod ut</h4></td>
-                </tr>
-                <tr>
-                  <td width="17%"><strong>Penulis</strong></td>
-                  <td width="43%">Surianto Rustan</td>
-                </tr>
-                <tr>
-                  <td><strong>Penerbit</strong></td>
-                  <td>UB Press</td>
-                </tr>
-                <tr>
-                  <td><strong>Tahun Terbit</strong></td>
-                  <td>2019</td>
-                </tr>
-                <tr>
-                  <td><strong>Kategori Buku</strong></td>
-                  <td>Machine Learning</td>
-                </tr>
-                <tr>
-                  <td><strong>Tag</strong></td>
-                  <td><a href="#">Deep Learning</a>, <a href="#">Phyton</a>, <a href="#">Machine Learning</a>, 
-                    <a href="#">Deep Learning</a>, <a href="#">Phyton</a>, <a href="#">Machine Learning</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td colspan="3">
-                    <h5>Sinopsis</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at dapibus ex. Nullam arcu erat, 
-                      vehicula elementum cursus vitae, gravida bibendum purus. Morbi mollis cursus gravida. Sed vel ultricies nunc. 
-                      Aenean fringilla sollicitudin nisi nec vulputate. Suspendisse quis justo erat. 
-                      Nullam sagittis, augue ut eleifend consectetur, orci augue cursus mauris, in facilisis lectus est sit amet erat. 
-                      Suspendisse blandit dapibus lacus, a gravida ex euismod ut. Morbi ac dictum lectus, et vulputate sapien. 
-                      Aliquam et enim tincidunt, accumsan sapien id, feugiat mauris. Phasellus at suscipit est.</p>
+                <tbody>                      
+                    <tr>
+                       <td><strong>Cover Buku<strong></td>
+                       <td><img src="admin/cover/<?php echo $cover;?>" 
+                       class="img-fluid" width="200px;"></td>
+                    </tr>               
+                    <tr>
+                        <td width="20%"><strong>Kategori Buku<strong></td>
+                        <td width="80%"><?php echo $kategori_buku;?></td>
+                    </tr>                 
+                    <tr>
+                        <td width="20%"><strong>Judul<strong></td>
+                        <td width="80%"><?php echo $judul;?></td>
+                    </tr>                 
+                    <tr>
+                        <td width="20%"><strong>Pengarang<strong></td>
+                        <td width="80%"><?php echo $pengarang;?></td>
+                    </tr>
+                    <tr>
+                         <td width="20%"><strong>Pengarang<strong></td>
+                         <td width="80%"><?php echo $penerbit;?></td>
+                    </tr>
+                    <tr>
+                         <td width="20%"><strong>Tahun Terbit<strong></td>
+                         <td width="80%"><?php echo $tahun_terbit;?></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tag<strong></td>
+                        <td>
+                        <ul>
+                        <?php
+                       //get tag
+                       $sql_h = "SELECT `t`.`tag` from `tag_buku` `tb`
+                                inner join `tag` `t`  ON  `tb`.`id_tag` = `t`.`id_tag` 
+                                where `tb`.`id_buku`='$id_buku'";
+                       $query_h = mysqli_query($koneksi,$sql_h);
+                       while($data_h = mysqli_fetch_row($query_h)){
+                       $tag= $data_h[0];
+                       ?>
+                       <li><?php echo $tag;?></li>
+                       <?php }?>
+                       </ul>
+                       </td>
+                     </tr>
+                     <tr>
+                        <td width="20%"><strong>Sinopsis<strong></td>
+                        <td width="80%"><?php echo $sinopsis;?></td>
+                     </tr> 
+                  </tbody>
+                </table>
 
-                    <p>Aliquam lorem nisi, auctor quis vulputate ac, consequat quis mauris. Class aptent taciti sociosqu ad litora 
-                      torquent per conubia nostra, per inceptos himenaeos.</p>
-                      <ol>
-                        <li>Curabitur malesuada vulputate elit, at sodales neque accumsan nec</li>
-                        <li>Ut ut est ut nisi dignissim imperdiet id quis sem</li>
-                        <li>Nam non vestibulum mauris. Nullam ac suscipit dolor, vitae fermentum nibh</li>
-                        <li>Proin vestibulum semper tempor. Donec vitae sagittis lectus, id congue ante</li>
-                        <li>Phasellus aliquam augue sit amet imperdiet semper</li>
-                        <li>Aenean eu dolor at ipsum commodo ornare a nec felis</li>
-                        <li>In sit amet tellus eu elit accumsan consequat quis sed mi</li>
-                      </ol>
-
-                    <p>Phasellus sagittis magna ac velit accumsan vehicula. Nunc sodales mi a nisl elementum, ut facilisis tortor vehicula. 
-                      Suspendisse tempor leo nunc. Donec laoreet leo sit amet consequat auctor. Sed facilisis tellus nisi, at 
-                      ullamcorper lorem rutrum iaculis. Suspendisse potenti. Proin venenatis felis quis nibh ultricies, vitae interdum 
-                      ligula consectetur. Nam fermentum nunc ut viverra cursus. Sed ac purus molestie, faucibus dui sed, imperdiet lacus.
-                      Mauris elementum vel turpis vel finibus. In id convallis quam, nec mollis nisl. Mauris faucibus finibus ultrices. 
-                      Suspendisse eu nulla nibh. Nam nec laoreet erat. Donec mauris nibh, molestie non luctus et, sagittis quis mauris. 
-                      Duis at enim ut augue sollicitudin aliquam.</p>
-                  </td>
-                </tr>
-              </table>
             </div><!-- .table-responsive -->
 
           </div><!-- /.blog-main -->

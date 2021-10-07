@@ -1,3 +1,19 @@
+<?php 
+  session_start();
+  include('koneksi/koneksi.php');
+  if(isset($_GET['data'])){
+    $id_kategori_blog = $_GET['data'];
+    $_SESSION['id_kategori_blog']=$id_kategori_blog;
+    
+      //get data kategori buku
+    $sql_d = "SELECT `kategori_blog` from `kategori_blog` where `id_kategori_blog` = '$id_kategori_blog'";
+    $query_d = mysqli_query($koneksi,$sql_d);
+    while($data_d = mysqli_fetch_row($query_d)){
+       $kategori_blog= $data_d[0];
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,14 +59,21 @@
       <!-- form start -->
       </br>
       <div class="col-sm-10">
-          <div class="alert alert-danger" role="alert">Maaf data Kategori Blog wajib di isi</div>
+          <?php if(!empty($_GET['notif'])){?>
+             <?php if($_GET['notif']=="editkosong"){?>
+                <div class="alert alert-danger" role="alert">
+                Maaf data kategori blog wajib di isi</div>
+             <?php }?>
+          <?php }?>
       </div>
-      <form class="form-horizontal">
+
+      <form class="form-horizontal" method="post" 
+        action="konfirmasieditkategoriblog.php">
         <div class="card-body">
           <div class="form-group row">
             <label for="Kategori Blog" class="col-sm-3 col-form-label">Kategori Blog</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" id="Kategori Blog" value="Website">
+              <input type="text" class="form-control" id="Kategori Blog" value="<?php echo $kategori_blog;?>" name="kategori_blog">
             </div>
           </div>
         </div>
