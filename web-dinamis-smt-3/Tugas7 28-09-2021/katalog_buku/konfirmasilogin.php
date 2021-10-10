@@ -1,4 +1,5 @@
 <?php
+    session_start();
     //akses file koneksi database
     include('koneksi/koneksi.php');
     if (isset($_POST['login'])) {
