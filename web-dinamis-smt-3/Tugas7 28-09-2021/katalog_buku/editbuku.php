@@ -29,6 +29,7 @@ if(isset($_GET['data'])){
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +84,9 @@ if(isset($_GET['data'])){
         <?php }?>
       </div>
 
-      <form class="form-horizontal" action="konfirmasieditbuku.php" method="post" enctype="multipart/form-data">
+
+      <form class="form-horizontal" action="konfirmasieditbuku.php" method="post"
+           enctype="multipart/form-data">
         <div class="card-body">      
             <div class="form-group row">
                <label for="foto" class="col-sm-3 col-form-label">Cover Buku   
@@ -198,6 +201,7 @@ if(isset($_GET['data'])){
             </div>
             <!-- /.card-footer -->
         </form>
+
 
     </div>
     <!-- /.card -->

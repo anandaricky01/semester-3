@@ -1,8 +1,8 @@
 <?php 
-  session_start();
-  include('koneksi/koneksi.php');
-  
-?>
+
+ include('koneksi/koneksi.php');
+
+ ?>
 
 <!DOCTYPE html>
 <html>
@@ -48,6 +48,7 @@
       <!-- /.card-header -->
       <!-- form start -->
       </br></br>
+      
       <div class="col-sm-10">
           <?php if((!empty($_GET['notif']))&&(!empty($_GET['jenis']))){?>
              <?php if($_GET['notif']=="tambahkosong"){?>
@@ -55,11 +56,12 @@
                 <?php echo $_GET['jenis'];?> wajib di isi</div>
              <?php }?>
           <?php }?>
-      </div> 
+      </div>
 
-      
-      <form class="form-horizontal" action="konfirmasitambahbuku.php" method="post" enctype="multipart/form-data">
-        <div class="card-body">          
+
+      <form class="form-horizontal" action="konfirmasitambahbuku.php" 
+          method="post" enctype="multipart/form-data">
+              <div class="card-body">          
           <div class="form-group row">
             <label for="foto" class="col-sm-3 col-form-label">Cover Buku </label>
             <div class="col-sm-7">
@@ -164,8 +166,8 @@
             <i class="fas fa-plus"></i> Tambah</button>
           </div>  
         </div>
-    <!-- /.card-footer -->
-    </form>
+      <!-- /.card-footer -->
+      </form>
 
     </div>
     <!-- /.card -->

@@ -15,12 +15,16 @@ if((isset($_GET['aksi']))&&(isset($_GET['data']))){
         }
       }
  
+    //hapus tag buku
+    $sql_dh = "delete from `tag_buku` where `id_buku` = '$id_buku'";
+    mysqli_query($koneksi,$sql_dh);
     //hapus data buku
     $sql_dm = "delete from `buku` where `id_buku` = '$id_buku'";
     mysqli_query($koneksi,$sql_dm);
   }
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -76,6 +80,7 @@ if((isset($_GET['aksi']))&&(isset($_GET['data']))){
                     </div><!-- .row -->
                   </form>
                 </div><br>
+
               <div class="col-sm-12">
                   <?php if(!empty($_GET['notif'])){?>
                       <?php if($_GET['notif']=="tambahberhasil"){?>
@@ -87,6 +92,8 @@ if((isset($_GET['aksi']))&&(isset($_GET['data']))){
                       <?php } ?>
                    <?php }?>
               </div>
+
+
 
 
                   <table class="table table-bordered">

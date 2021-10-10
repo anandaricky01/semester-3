@@ -12,7 +12,7 @@ if(isset($_SESSION['id_buku'])){
     $tag = $_POST['tag'];
     $lokasi_file = $_FILES['cover']['tmp_name'];
     $nama_file = $_FILES['cover']['name'];
-    $direktori = 'cover/'.$nama_file;
+    $direktori = 'admin/cover/'.$nama_file;
  
     //get cover 
     $sql_f = "SELECT `cover` FROM `buku` WHERE `id_buku`='$id_buku'";
@@ -43,10 +43,10 @@ if(isset($_SESSION['id_buku'])){
 	}else{
          $lokasi_file = $_FILES['cover']['tmp_name'];
 	   $nama_file = $_FILES['cover']['name'];
-	   $direktori = 'cover/'.$nama_file;
+	   $direktori = 'admin/cover/'.$nama_file;
 	   if(move_uploaded_file($lokasi_file,$direktori)){
             if(!empty($cover)){
-                unlink("cover/$cover");
+                unlink("admin/cover/$cover");
             }
 	$sql = "UPDATE `buku` set 
      `id_kategori_buku`='$id_kategori_buku',`judul`='$judul',
