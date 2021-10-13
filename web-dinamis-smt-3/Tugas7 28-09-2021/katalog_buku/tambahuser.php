@@ -45,10 +45,17 @@
       <!-- /.card-header -->
       <!-- form start -->
       </br>
+
       <div class="col-sm-10">
-          <div class="alert alert-danger" role="alert">Maaf data nama wajib di isi</div>
+          <?php if((!empty($_GET['notif']))&&(!empty($_GET['jenis']))){?>
+             <?php if($_GET['notif']=="tambahkosong"){?>
+                <div class="alert alert-danger" role="alert">Maaf data 
+                <?php echo $_GET['jenis'];?> wajib di isi</div>
+             <?php }?>
+          <?php }?>
       </div>
-      <form class="form-horizontal">
+
+      <form class="form-horizontal" method="POST" action="konfirmasitambahuser.php" enctype="multipart/form-data">
         <div class="card-body">
           <div class="form-group row">
             <label for="foto" class="col-sm-12 col-form-label"><span class="text-info"><i class="fas fa-user-circle"></i> <u>Data User</u></span></label>
@@ -83,15 +90,15 @@
           <div class="form-group row">
             <label for="password" class="col-sm-3 col-form-label">Password</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="password" id="password" value="">
+              <input type="password" class="form-control" name="password" id="password" value="">
             </div>
           </div>
           <div class="form-group row">
             <label for="level" class="col-sm-3 col-form-label">Level</label>
             <div class="col-sm-7">
-              <select class="form-control" id="jurusan">
-                <option value="superadmin">superadmin</option>
-                <option value="admin">admin</option>
+              <select class="form-control" id="jurusan" name="level">
+                <option value="superadmin">Superadmin</option>
+                <option value="admin">Admin</option>
               </select>
             </div>
           </div>

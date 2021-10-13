@@ -1,3 +1,23 @@
+<?php 
+
+  session_start();
+  include('koneksi/koneksi.php');
+  if (isset($_GET['data'])) {
+    $id_user = $_GET['data'];
+    $sql = "SELECT `nama`,`email`,`level`,`username`,`foto` FROM `user` WHERE id_user=$id_user";
+    $query = mysqli_query($koneksi, $sql);
+
+    while($data = mysqli_fetch_assoc($query)){
+      $nama = $data['nama'];
+      $email = $data['email'];
+      $level = $data['level'];
+      $username = $data['username'];
+      $foto = $data['foto'];
+    }
+  }
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,23 +66,23 @@
                       </tr>                      
                       <tr>
                         <td><strong>Foto User<strong></td>
-                        <td><img src="foto/salnan.jpg" class="img-fluid" width="200px;"></td>
+                        <td><img src="admin/foto/<?php echo $foto; ?>" class="img-fluid" width="200px;"></td>
                       </tr>               
                       <tr>
                         <td width="20%"><strong>Nama<strong></td>
-                        <td width="80%">Salna Ratih</td>
+                        <td width="80%"><?php echo $nama; ?></td>
                       </tr>                 
                       <tr>
                         <td width="20%"><strong>Email<strong></td>
-                        <td width="80%">salnanratih88@gmail.com</td>
+                        <td width="80%"><?php echo $email; ?></td>
                       </tr>
                       <tr>
                         <td width="20%"><strong>Level<strong></td>
-                        <td width="80%">Superadmin</td>
+                        <td width="80%"><?php echo $level; ?></td>
                       </tr>                 
                       <tr>
                         <td width="20%"><strong>Username<strong></td>
-                        <td width="80%">salnan</td>
+                        <td width="80%"><?php echo $username ?></td>
                       </tr> 
                     </tbody>
                   </table>  

@@ -1,3 +1,26 @@
+<?php 
+
+  session_start();
+  include('koneksi/koneksi.php');
+  if (isset($_GET['data']) ){
+    $id_user = $_GET['data'];
+    $_SESSION['id_user']=$id_user;
+
+    $sql_u = "SELECT * FROM `user` WHERE id_user=$id_user";
+    $query_u = mysqli_query($koneksi, $sql_u);
+
+    while($data = mysqli_fetch_assoc($query_u)){
+      $id_user = $data['id_user'];
+      $nama = $data['nama'];
+      $email = $data['email'];
+      $username = $data['username'];
+      $level = $data['level'];
+    }
+
+  }
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,15 +64,25 @@
       <!-- /.card-header -->
       <!-- form start -->
       </br>
+
       <div class="col-sm-10">
-          <div class="alert alert-danger" role="alert">Maaf data nama wajib di isi</div>
+        <?php if((!empty($_GET['notif']))&&(!empty($_GET['jenis']))){?>
+          <?php if($_GET['notif']=="editkosong"){?>
+            <div class="alert alert-danger" role="alert">Maaf data 
+            <?php echo $_GET['jenis'];?> wajib di isi</div>
+          <?php }?>
+        <?php }?>
       </div>
-      <form class="form-horizontal">
+
+      <form class="form-horizontal" action="konfirmasiedituser.php" method="post"
+           enctype="multipart/form-data">
       <div class="card-body">
           <div class="form-group row">
             <label for="foto" class="col-sm-12 col-form-label"><span class="text-info"><i class="fas fa-user-circle"></i> <u>Data User</u></span></label>
           </div>
-          
+          <div>
+            <input type="hidden" name="id_user" value="<?php echo $id_user; ?>">
+          </div>
           <div class="form-group row">
             <label for="foto" class="col-sm-3 col-form-label">Foto </label>
             <div class="col-sm-7">
@@ -62,25 +95,25 @@
           <div class="form-group row">
             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="nama" id="nama" value="Salnan">
+              <input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="email" class="col-sm-3 col-form-label">Email</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="email" id="email" value="salnanrarih88@gmail.com">
+              <input type="text" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="username" class="col-sm-3 col-form-label">Username</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="username" id="username" value="salnan">
+              <input type="text" class="form-control" name="username" id="username" value="<?php echo $username; ?>">
             </div>
           </div>
           <div class="form-group row">
             <label for="password" class="col-sm-3 col-form-label">Password</label>
             <div class="col-sm-7">
-              <input type="text" class="form-control" name="password" id="password" value="">
+              <input type="password" class="form-control" name="password" id="password" value="">
               <span class="text-danger" style="font-weight:lighter;font-size:12px">
                *Jangan diisi jika tidak ingin mengubah password</span>
             </div>
@@ -88,9 +121,20 @@
           <div class="form-group row">
             <label for="level" class="col-sm-3 col-form-label">Level</label>
             <div class="col-sm-7">
-              <select class="form-control" id="jurusan">
-                <option value="superadmin">superadmin</option>
-                <option value="admin">admin</option>
+              <select class="form-control" id="level" name="level">
+                <?php 
+
+                  $sql = "SELECT DISTINCT `level` FROM `user`";
+
+                  $query = mysqli_query($koneksi, $sql);
+
+                  while($dataLevel = mysqli_fetch_row($query)){
+                    $dt = $dataLevel[0]
+                 ?>
+                <option value="<?php echo $dt; ?>" <?php if ($dt == $level): ?> selected 
+                  
+                <?php endif ?>><?php echo $dt ?></option>
+              <?php } ?>
               </select>
             </div>
           </div>

@@ -119,7 +119,7 @@ session_start();
                       <td><?php echo $no;?></td>
                       <td><?php echo $kategori_buku;?></td>
                       <td align="center">
-                      <a href="editkategoribuku.php?data=<?php echo $id_kategori_buku;?>"class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
+                      <a href="editkategoribuku.php?data=<?php echo $id_kategori_buku;?>" class="btn btn-xs btn-info"><i class="fas fa-edit"></i> Edit</a>
                       <a href="javascript:if(confirm('Anda yakin ingin menghapus data <?php echo $kategori_buku; ?>?'))window.location.href = 'kategoribuku.php?aksi=hapus&data=<?php echo $id_kategori_buku;?>&notif=hapusberhasil'" 
                         class="btn btn-xs btn-warning"><i class="fas fa-trash"></i>  
                         Hapus
