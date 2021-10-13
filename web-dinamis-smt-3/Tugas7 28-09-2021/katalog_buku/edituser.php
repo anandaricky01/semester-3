@@ -10,7 +10,6 @@
     $query_u = mysqli_query($koneksi, $sql_u);
 
     while($data = mysqli_fetch_assoc($query_u)){
-      $id_user = $data['id_user'];
       $nama = $data['nama'];
       $email = $data['email'];
       $username = $data['username'];
@@ -79,9 +78,6 @@
       <div class="card-body">
           <div class="form-group row">
             <label for="foto" class="col-sm-12 col-form-label"><span class="text-info"><i class="fas fa-user-circle"></i> <u>Data User</u></span></label>
-          </div>
-          <div>
-            <input type="hidden" name="id_user" value="<?php echo $id_user; ?>">
           </div>
           <div class="form-group row">
             <label for="foto" class="col-sm-3 col-form-label">Foto </label>

@@ -4,7 +4,7 @@
     include('koneksi/koneksi.php');
     if(isset($_SESSION['id_user'])){
 
-      $id_user = $_POST['id_user'];
+      $id_user = $_SESSION['id_user'];
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $username = $_POST['username'];
