@@ -1,0 +1,6 @@
+options All -Indexes
+
+RewriteEngine On
+
+RewriteRule ^([-a-z]*)$ index.php?include=$1 [L]
+RewriteRule ^([-a-z]*)&data=([0-9]*)$ index.php?include=$1&data=$2 [L]

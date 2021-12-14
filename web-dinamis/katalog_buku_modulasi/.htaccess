@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteRule ^([-a-z]*)$ index.php?include=$1 [L]
+RewriteRule ^([-a-z]*)-search-([a-z]*)$ index.php?include=$1&search=$2 [L]
+RewriteRule ^([-a-z]*)-data-([0-9]*)$ index.php?include=$1&data=$2 [L]
+RewriteRule ^([-a-z]*)-blog-([0-9]*)$ index.php?include=$1&blog=$2 [L]
+RewriteRule ^([-a-z]*)-jenis-([-a-z]*)$ index.php?include=$1&jenis=$2 [L]
