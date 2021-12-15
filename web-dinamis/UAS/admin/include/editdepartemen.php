@@ -4,11 +4,13 @@
     $_SESSION['id_departemen']=$id_departemen;
     
       //get data kategori buku
-    $sql_d = "SELECT `departemen`, `deskripsi` FROM `departemen` WHERE `id_departemen` = '$id_departemen'";
+    $sql_d = "SELECT * FROM `departemen` WHERE `id_departemen` = '$id_departemen'";
     $query_d = mysqli_query($koneksi,$sql_d);
-    while($data_d = mysqli_fetch_row($query_d)){
-       $departemen= $data_d[0];
-       $deskripsi= $data_d[1];
+    while($data_d = mysqli_fetch_assoc($query_d)){
+       $departemen= $data_d['departemen'];
+       $deskripsi= $data_d['deskripsi'];
+       $logo= $data_d['logo'];
+       $kepanjangan= $data_d['kepanjangan'];
     }
   }
 ?>
@@ -59,9 +61,27 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="kepanjangan" class="col-sm-3 col-form-label">kepanjangan</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" id="kepanjangan" name="kepanjangan" value="<?php echo $kepanjangan ?>">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="logo_saat_ini" class="col-sm-3 col-form-label">logo saat ini</label>
+            <div class="col-sm-7">
+              <?php echo $logo; ?>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="logo" class="col-sm-3 col-form-label">logo</label>
+            <div class="col-sm-7">
+              <textarea class="form-control" name="logo"><?php echo $logo; ?></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="departemen" class="col-sm-3 col-form-label">departemen</label>
             <div class="col-sm-7">
-              <textarea class="form-control" id="deskripsi" name="deskripsi"><?php echo $deskripsi ?></textarea> 
+              <textarea class="form-control" id="editor1" name="deskripsi"><?php echo $deskripsi ?></textarea> 
             </div>
           </div>
         </div>

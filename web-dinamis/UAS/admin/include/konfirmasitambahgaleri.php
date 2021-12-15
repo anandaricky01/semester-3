@@ -13,8 +13,8 @@
     }else{   
 
    $sql = "INSERT INTO `galeri` 
-      (`id_kategori_kegiatan`,`galeri`)
-      VALUES ('$id_kategori_kegiatan','$nama_file')";
+      (`id_galeri`,`id_kategori_kegiatan`,`galeri`)
+      VALUES (NULL,'$id_kategori_kegiatan','$nama_file')";
       //echo $sql;
    mysqli_query($koneksi,$sql);
    $id_buku = mysqli_insert_id($koneksi);

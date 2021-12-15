@@ -11,8 +11,8 @@
 	}else if(empty($id_departemen)){
 		header("Location:tambah-proker&notif=tambahkosong");
 	}else{
-		$sql = "INSERT INTO `proker` (`id_departemen`,`proker`,`deskripsi`, `id_kategori_kegiatan`) 
-		VALUES ('$id_departemen','$proker','$deskripsi', '$id_kategori_kegiatan')";
+		$sql = "INSERT INTO `proker` (`id_proker`,`id_departemen`,`proker`,`deskripsi`, `id_kategori_kegiatan`) 
+		VALUES (NULL,'$id_departemen','$proker','$deskripsi', '$id_kategori_kegiatan')";
 		mysqli_query($koneksi,$sql);
 	header("Location:proker&notif=tambahberhasil");	
 	}

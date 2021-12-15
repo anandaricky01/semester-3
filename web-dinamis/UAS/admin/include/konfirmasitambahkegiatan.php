@@ -19,9 +19,9 @@
     }else{   
 
    $sql = "INSERT INTO `kegiatan` 
-      (`id_kategori_kegiatan`,`kegiatan`,`foto`,`isi`,
+      (`id_kegiatan`,`id_kategori_kegiatan`,`kegiatan`,`foto`,`isi`,
    `tanggal`)
-      VALUES ('$id_kategori_kegiatan','$kegiatan','$nama_file','$isi',
+      VALUES (NULL,'$id_kategori_kegiatan','$kegiatan','$nama_file','$isi',
    '$tanggal')";
       //echo $sql;
    mysqli_query($koneksi,$sql);

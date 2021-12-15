@@ -75,20 +75,32 @@
       <link href="css/features.css" rel="stylesheet">
 
       <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
         }
-      }
-    </style>
+
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+    <?php endif; ?>
+
+    <?php if ($_GET['include'] == 'departemen') : ?>
+      <style>
+        .zoom {
+          transition: transform .5s; /* Animation */
+        }
+
+        .zoom:hover {
+          transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+      </style>
     <?php endif; ?>
   </head>
   <body>
@@ -104,10 +116,20 @@
          } else if($_GET['include'] == 'galery'){
             include('include/galery.php');
          } 
+         // faq
+         else if($_GET['include'] == 'faq'){
+          include('include/faq.php');
+         }
           // profile
          else if($_GET['include'] == 'profile'){
             include('include/profile.php');
          } 
+          // departemen
+         else if($_GET['include'] == 'departemen'){
+            include('include/departemen.php');
+         }else if($_GET['include'] == 'detail-departemen'){
+            include('include/detaildepartemen.php');
+         }
           // home
          else {
             include('include/index.php');

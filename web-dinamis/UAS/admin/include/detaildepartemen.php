@@ -9,7 +9,9 @@
   while($data = mysqli_fetch_row($query)){
     $id_departemen = $data[0];
     $departemen = $data[1];
-    $deskripsi = $data[2];
+    $kepanjangan = $data[2];
+    $deskripsi = $data[3];
+    $logo = $data[4];
   }
 
 ?>
@@ -58,7 +60,15 @@
                       <tr>
                           <td width="20%"><strong>Nama Departemen<strong></td>
                           <td width="80%"><?php echo $departemen; ?></td>
-                      </tr>                
+                      </tr>   
+                      <tr>
+                          <td width="20%"><strong>Kepanjangan<strong></td>
+                          <td width="80%"><?php echo $kepanjangan; ?></td>
+                      </tr>   
+                      <tr>
+                          <td width="20%"><strong>logo<strong></td>
+                          <td width="80%"><?php echo $logo; ?></td>
+                      </tr>           
                       <tr>
                           <td width="20%"><strong>Deskripsi<strong></td>
                           <td width="80%"><?php echo $deskripsi;?></td>

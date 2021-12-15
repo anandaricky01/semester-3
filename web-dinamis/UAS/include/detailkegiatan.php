@@ -18,8 +18,13 @@
 <div class="container">
 	    <!-- Main content -->
 	    <section class="content">
+	    	<nav aria-label="breadcrumb">
+				  <ol class="breadcrumb">
+				    <li class="breadcrumb-item"><a href="kegiatan">Kegiatan</a></li>
+				    <li class="breadcrumb-item active" aria-current="page"><?php echo $kegiatan; ?></li>
+				  </ol>
+				</nav>
 	            <div class="card">
-
 	                <table class="table table-bordered">
 	                  <tbody>  
 	                      <tr>

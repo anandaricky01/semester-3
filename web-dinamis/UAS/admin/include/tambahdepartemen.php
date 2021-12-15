@@ -45,6 +45,18 @@
             </div>
           </div>
           <div class="form-group row">
+            <label for="departemen" class="col-sm-3 col-form-label">kepanjangan</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" id="kepanjangan" value="" name="kepanjangan">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="isi" class="col-sm-3 col-form-label">Logo (dalam svg)</label>
+            <div class="col-sm-7">
+              <textarea class="form-control" rows="12" name="logo"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="isi" class="col-sm-3 col-form-label">deskripsi</label>
             <div class="col-sm-7">
               <textarea class="form-control" id="editor1" rows="12" name="deskripsi"></textarea>
