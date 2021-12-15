@@ -25,7 +25,7 @@
             $tanggal = $data['tanggal'];
             $kategori_kegiatan = $data['kategori_kegiatan'];
           ?>
-        <div class="col">
+        <div class="col zoom-kegiatan">
           <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('img/<?php echo $foto; ?>');">
             <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
               <a href="detail-kegiatan&data=<?php echo $id_kegiatan; ?>" style="text-decoration:none">

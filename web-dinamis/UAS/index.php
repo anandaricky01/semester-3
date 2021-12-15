@@ -91,17 +91,22 @@
       </style>
     <?php endif; ?>
 
-    <?php if ($_GET['include'] == 'departemen') : ?>
       <style>
+        .zoom-kegiatan{
+          transition: transform .5s;
+        }
         .zoom {
           transition: transform .5s; /* Animation */
+        }
+
+        .zoom-kegiatan:hover {
+          transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 
         .zoom:hover {
           transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
       </style>
-    <?php endif; ?>
   </head>
   <body>
   	<?php include('includes/navbar.php'); ?>
